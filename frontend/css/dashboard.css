@@ -1,0 +1,213 @@
+/* ============================================
+   Dashboard Styles
+   ============================================ */
+
+/* ── Sidebar ─────────────────────────────── */
+.sidebar {
+  width: 280px; height: 100vh; position: fixed; left: 0; top: 0;
+  background: var(--bg-card); backdrop-filter: blur(20px);
+  border-right: 1px solid var(--border); padding: 1.5rem;
+  display: flex; flex-direction: column; z-index: 100;
+  transition: var(--transition); overflow-y: auto;
+}
+.sidebar-brand {
+  font-size: 1.3rem; font-weight: 800; padding: 0.5rem 0 1.5rem;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; display: flex; align-items: center; gap: 10px;
+}
+.sidebar-brand i { font-size: 1.5rem; -webkit-text-fill-color: var(--primary); }
+
+.sidebar-nav { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+.sidebar-link {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px; border-radius: var(--radius-sm);
+  color: var(--text-secondary); font-weight: 500; font-size: 0.9rem;
+  transition: var(--transition); cursor: pointer; border: none;
+  background: transparent; width: 100%; text-align: left;
+}
+.sidebar-link:hover { background: var(--hover-bg); color: var(--text); }
+.sidebar-link.active {
+  background: linear-gradient(135deg, rgba(10,102,194,0.15), rgba(56,189,248,0.1));
+  color: var(--primary); font-weight: 600;
+}
+.sidebar-link i { width: 20px; text-align: center; font-size: 1.1rem; }
+
+.sidebar-section {
+  font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1.5px; color: var(--gray); padding: 1.5rem 16px 0.5rem;
+}
+
+/* ── Main Content ────────────────────────── */
+.main-content {
+  margin-left: 280px; min-height: 100vh; padding: 2rem;
+  transition: var(--transition);
+}
+.page-header {
+  margin-bottom: 2rem; display: flex; justify-content: space-between;
+  align-items: center; flex-wrap: wrap; gap: 1rem;
+}
+.page-title { font-size: 1.8rem; font-weight: 800; }
+.page-subtitle { color: var(--text-secondary); font-size: 0.9rem; margin-top: 4px; }
+
+/* ── Stat Cards ──────────────────────────── */
+.stat-card {
+  padding: 1.5rem; position: relative; overflow: hidden;
+}
+.stat-card .stat-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; color: #fff; margin-bottom: 1rem;
+}
+.stat-card .stat-value { font-size: 2rem; font-weight: 800; line-height: 1; }
+.stat-card .stat-label { color: var(--text-secondary); font-size: 0.85rem; margin-top: 4px; }
+.stat-card .stat-change {
+  font-size: 0.8rem; font-weight: 600; margin-top: 8px;
+  display: flex; align-items: center; gap: 4px;
+}
+.stat-card .stat-change.positive { color: var(--success); }
+.stat-card::after {
+  content: ''; position: absolute; top: -50%; right: -50%;
+  width: 200px; height: 200px; border-radius: 50%;
+  background: linear-gradient(135deg, rgba(10,102,194,0.08), transparent);
+}
+
+/* ── Progress Circle ─────────────────────── */
+.progress-circle {
+  width: 160px; height: 160px; position: relative; margin: 0 auto;
+}
+.progress-circle svg { transform: rotate(-90deg); }
+.progress-circle .progress-bg {
+  fill: none; stroke: var(--border); stroke-width: 8;
+}
+.progress-circle .progress-bar {
+  fill: none; stroke: url(#gradient); stroke-width: 8;
+  stroke-linecap: round; transition: stroke-dashoffset 1s ease;
+}
+.progress-circle .progress-text {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%); text-align: center;
+}
+.progress-circle .progress-value { font-size: 2.5rem; font-weight: 800; color: var(--primary); }
+.progress-circle .progress-label { font-size: 0.75rem; color: var(--text-secondary); }
+
+/* ── Output Area ─────────────────────────── */
+.output-area {
+  background: var(--bg-input); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 1.5rem;
+  min-height: 200px; position: relative; white-space: pre-wrap;
+  line-height: 1.8; font-size: 0.95rem;
+}
+.output-actions {
+  display: flex; gap: 8px; margin-top: 1rem; flex-wrap: wrap;
+}
+
+/* ── Tag Chips ───────────────────────────── */
+.tag-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 14px; border-radius: 20px; font-size: 0.8rem;
+  font-weight: 500; background: rgba(10,102,194,0.1);
+  color: var(--primary); cursor: pointer; transition: var(--transition);
+}
+.tag-chip:hover { background: rgba(10,102,194,0.2); transform: scale(1.05); }
+
+/* ── History Cards ───────────────────────── */
+.history-card {
+  padding: 1.25rem; margin-bottom: 1rem;
+  border-left: 3px solid var(--primary);
+}
+.history-card .history-type {
+  font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px;
+  font-weight: 700; margin-bottom: 0.5rem;
+}
+.history-card .history-content {
+  font-size: 0.9rem; color: var(--text-secondary);
+  max-height: 100px; overflow: hidden; margin-bottom: 0.75rem;
+}
+.history-card .history-date { font-size: 0.75rem; color: var(--gray); }
+
+/* ── Loading Spinner ─────────────────────── */
+.spinner-overlay {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 9999; display: none;
+}
+.spinner-overlay.active { display: flex; }
+.ai-spinner {
+  width: 60px; height: 60px; border-radius: 50%;
+  border: 3px solid var(--border); border-top-color: var(--primary);
+  animation: spin 1s linear infinite;
+}
+.ai-spinner-text { color: #fff; font-weight: 600; margin-top: 1rem; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Category Cards ──────────────────────── */
+.category-card {
+  padding: 1.5rem; text-align: center; cursor: pointer;
+  border: 2px solid transparent;
+}
+.category-card:hover, .category-card.selected {
+  border-color: var(--primary);
+}
+.category-card i { font-size: 2rem; color: var(--primary); margin-bottom: 0.75rem; }
+.category-card h5 { font-weight: 700; font-size: 0.9rem; }
+
+/* ── Length Selector ─────────────────────── */
+.length-option {
+  padding: 1rem; text-align: center; cursor: pointer;
+  border: 2px solid var(--border); border-radius: var(--radius-sm);
+  transition: var(--transition);
+}
+.length-option:hover, .length-option.selected {
+  border-color: var(--primary); background: rgba(10,102,194,0.05);
+}
+
+/* ── Headline Cards ──────────────────────── */
+.headline-card {
+  padding: 1rem 1.25rem; margin-bottom: 0.75rem;
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 1rem;
+}
+.headline-card .headline-text { flex: 1; font-weight: 500; }
+.headline-card .headline-actions { display: flex; gap: 6px; flex-shrink: 0; }
+
+/* ── Mobile Sidebar Toggle ───────────────── */
+.sidebar-toggle {
+  display: none; position: fixed; top: 1rem; left: 1rem;
+  z-index: 200; width: 44px; height: 44px; border-radius: 12px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  color: var(--text); font-size: 1.2rem; cursor: pointer;
+  align-items: center; justify-content: center;
+}
+.sidebar-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.5); z-index: 99;
+}
+
+@media (max-width: 992px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .sidebar-toggle { display: flex; }
+  .sidebar-overlay.active { display: block; }
+  .main-content { margin-left: 0; padding: 1rem; padding-top: 4rem; }
+}
+@media (max-width: 576px) {
+  .page-title { font-size: 1.4rem; }
+  .stat-card .stat-value { font-size: 1.5rem; }
+}
+
+/* ── Radar Chart Container ───────────────── */
+.chart-container {
+  background: var(--bg-card); border-radius: var(--radius);
+  padding: 1.5rem; border: 1px solid var(--border);
+  position: relative;
+}
+.chart-container canvas { max-height: 350px; }
+
+/* ── Copy Animation ──────────────────────── */
+.copied { animation: copiedFlash 0.5s ease; }
+@keyframes copiedFlash {
+  0% { background: rgba(34,197,94,0.3); }
+  100% { background: transparent; }
+}

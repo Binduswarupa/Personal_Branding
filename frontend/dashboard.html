@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - BrandBoost AI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/dashboard.css" rel="stylesheet">
+</head>
+<body>
+    <div class="bg-animated"></div>
+    <button class="sidebar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand"><i class="fab fa-linkedin"></i> BrandBoost AI</div>
+        <nav class="sidebar-nav">
+            <div class="sidebar-section">Main</div>
+            <a href="dashboard.html" class="sidebar-link"><i class="fas fa-th-large"></i> Dashboard</a>
+            <a href="profile-analysis.html" class="sidebar-link"><i class="fas fa-search-plus"></i> Profile Analyzer</a>
+            <a href="branding-score.html" class="sidebar-link"><i class="fas fa-chart-pie"></i> Branding Score</a>
+            <div class="sidebar-section">Content Tools</div>
+            <a href="headline-generator.html" class="sidebar-link"><i class="fas fa-heading"></i> Headline Generator</a>
+            <a href="about-generator.html" class="sidebar-link"><i class="fas fa-user-edit"></i> About Generator</a>
+            <a href="post-generator.html" class="sidebar-link"><i class="fas fa-pen-fancy"></i> Post Generator</a>
+            <a href="hashtag-generator.html" class="sidebar-link"><i class="fas fa-hashtag"></i> Hashtag Generator</a>
+            <div class="sidebar-section">Account</div>
+            <a href="history.html" class="sidebar-link"><i class="fas fa-history"></i> History</a>
+            <button class="sidebar-link" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </nav>
+        <div style="padding:1rem;border-top:1px solid var(--border);margin-top:auto">
+            <div class="d-flex align-items-center gap-2">
+                <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.85rem" id="userAvatar">U</div>
+                <div><div style="font-weight:600;font-size:0.85rem" id="userName">User</div>
+                <div style="font-size:0.7rem;color:var(--text-secondary)" id="userEmail"></div></div>
+                <button class="theme-toggle ms-auto" id="themeToggle" style="width:32px;height:32px;font-size:0.85rem"><i class="fas fa-sun"></i></button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="page-header">
+            <div>
+                <h1 class="page-title">Dashboard</h1>
+                <p class="page-subtitle">Welcome back! Here's your LinkedIn branding overview.</p>
+            </div>
+        </div>
+
+        <!-- Stats Row -->
+        <div class="row g-4 mb-4">
+            <div class="col-md-3 col-6">
+                <div class="glass-card stat-card">
+                    <div class="stat-icon" style="background:linear-gradient(135deg,#0A66C2,#38BDF8)"><i class="fas fa-file-alt"></i></div>
+                    <div class="stat-value" id="statPosts">0</div>
+                    <div class="stat-label">Posts Generated</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="glass-card stat-card">
+                    <div class="stat-icon" style="background:linear-gradient(135deg,#22C55E,#38BDF8)"><i class="fas fa-chart-line"></i></div>
+                    <div class="stat-value" id="statScore">0</div>
+                    <div class="stat-label">Branding Score</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="glass-card stat-card">
+                    <div class="stat-icon" style="background:linear-gradient(135deg,#F59E0B,#EF4444)"><i class="fas fa-heading"></i></div>
+                    <div class="stat-value" id="statHeadlines">0</div>
+                    <div class="stat-label">Headlines Created</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="glass-card stat-card">
+                    <div class="stat-icon" style="background:linear-gradient(135deg,#8B5CF6,#EC4899)"><i class="fas fa-user-check"></i></div>
+                    <div class="stat-value" id="statCompletion">0</div>
+                    <div class="stat-label">Profile Completion %</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Completion & Quick Actions -->
+        <div class="row g-4 mb-4">
+            <div class="col-lg-8">
+                <div class="glass-card">
+                    <h5 style="font-weight:700;margin-bottom:1.5rem"><i class="fas fa-tasks me-2 text-primary"></i>Profile Completion</h5>
+                    <div style="height:10px;background:var(--border);border-radius:5px;overflow:hidden;margin-bottom:1rem">
+                        <div id="completionBar" style="width:0%;height:100%;background:linear-gradient(90deg,var(--primary),var(--accent));border-radius:5px;transition:width 1.5s ease"></div>
+                    </div>
+                    <p style="color:var(--text-secondary);font-size:0.85rem">Complete all sections of your profile for maximum recruiter visibility.</p>
+                    <div class="row g-3 mt-2">
+                        <div class="col-md-4"><a href="profile-analysis.html" class="glass-card d-block text-center p-3" style="cursor:pointer"><i class="fas fa-search-plus text-primary" style="font-size:1.5rem"></i><div style="font-weight:600;margin-top:0.5rem;font-size:0.85rem">Analyze Profile</div></a></div>
+                        <div class="col-md-4"><a href="headline-generator.html" class="glass-card d-block text-center p-3" style="cursor:pointer"><i class="fas fa-heading text-warning" style="font-size:1.5rem"></i><div style="font-weight:600;margin-top:0.5rem;font-size:0.85rem">New Headline</div></a></div>
+                        <div class="col-md-4"><a href="post-generator.html" class="glass-card d-block text-center p-3" style="cursor:pointer"><i class="fas fa-pen-fancy text-success" style="font-size:1.5rem"></i><div style="font-weight:600;margin-top:0.5rem;font-size:0.85rem">Create Post</div></a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="glass-card h-100">
+                    <h5 style="font-weight:700;margin-bottom:1rem"><i class="fas fa-fire me-2" style="color:var(--danger)"></i>Trending Topics</h5>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="tag-chip">#AI</span>
+                        <span class="tag-chip">#MachineLearning</span>
+                        <span class="tag-chip">#CloudComputing</span>
+                        <span class="tag-chip">#CyberSecurity</span>
+                        <span class="tag-chip">#DataScience</span>
+                        <span class="tag-chip">#GenAI</span>
+                        <span class="tag-chip">#Python</span>
+                        <span class="tag-chip">#DevOps</span>
+                        <span class="tag-chip">#CareerGrowth</span>
+                        <span class="tag-chip">#TechJobs</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tools Grid -->
+        <div class="row g-4">
+            <div class="col-12">
+                <h5 style="font-weight:700;margin-bottom:1rem"><i class="fas fa-toolbox me-2"></i>AI Tools</h5>
+            </div>
+            <div class="col-md-4 col-6"><a href="about-generator.html" class="glass-card feature-card d-block"><div class="icon-wrapper"><i class="fas fa-user-edit"></i></div><h3>About Generator</h3><p>Craft your professional story</p></a></div>
+            <div class="col-md-4 col-6"><a href="hashtag-generator.html" class="glass-card feature-card d-block"><div class="icon-wrapper" style="background:linear-gradient(135deg,#F59E0B,#EF4444)"><i class="fas fa-hashtag"></i></div><h3>Hashtag Finder</h3><p>Discover trending hashtags</p></a></div>
+            <div class="col-md-4 col-6"><a href="branding-score.html" class="glass-card feature-card d-block"><div class="icon-wrapper" style="background:linear-gradient(135deg,#22C55E,#0A66C2)"><i class="fas fa-chart-pie"></i></div><h3>Branding Score</h3><p>Measure your brand strength</p></a></div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!requireAuth()) return;
+            const user = getUser();
+            if (user) {
+                document.getElementById('userAvatar').textContent = user.name?.charAt(0)?.toUpperCase() || 'U';
+            }
+        });
+    </script>
+</body>
+</html>
